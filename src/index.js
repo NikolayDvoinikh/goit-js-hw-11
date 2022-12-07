@@ -1,4 +1,4 @@
-import { fetch } from './api.js';
+import { getImages } from './api.js';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -8,6 +8,13 @@ refs.form.addEventListener('submit', onSubmitForm);
 
 function onSubmitForm(e) {
   e.preventDefault();
+  const {
+    elements: { searchQuery },
+  } = e.target;
+  let searchImages = searchQuery.value;
+  console.dir(searchImages);
+
+  getImages(searchImages);
 }
 
 function renderImages() {
