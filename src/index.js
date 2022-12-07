@@ -1,7 +1,14 @@
-import axios from 'axios';
+import { fetch } from './api.js';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { refs } from './refs.js';
+
+refs.form.addEventListener('submit', onSubmitForm);
+
+function onSubmitForm(e) {
+  e.preventDefault();
+}
 
 function renderImages() {
   return items.map(
