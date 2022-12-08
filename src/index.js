@@ -11,32 +11,59 @@ function onSubmitForm(e) {
   const {
     elements: { searchQuery },
   } = e.target;
-  let searchImages = searchQuery.value;
+  const searchImages = searchQuery.value;
   console.dir(searchImages);
 
-  getImages(searchImages);
+  getImages(searchImages).then(data => {
+    refs.gallery.insertAdjacentHTML('beforeend', renderImages(data.hits));
+    new SimpleLightbox('div.gallery a', {
+      captionsData: 'alt',
+      captionsDelay: 250,
+    });
+  });
 }
 
-function renderImages() {
-  return items.map(
-    item => `<div class="photo-card">
-      <img src="" alt="" loading="lazy" />
-      <div class="info">
-        <p class="info-item">
-          <b>Likes</b>
-        </p>
-        <p class="info-item">
-          <b>Views</b>
-        </p>
-        <p class="info-item">
-          <b>Comments</b>
-        </p>
-        <p class="info-item">
-          <b>Downloads</b>
-        </p>
-      </div>
-    </div>;`
-  );
+function renderImages(items) {
+  // itemsList = items;
+  return items
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `          
+            <div class="photo-card">
+              <a href="${largeImageURL}">  
+                <img
+                  src="${webformatURL}" 
+                  alt="${tags}"
+                  loading="lazy" 
+                />
+              </a>
+              <div class="info">
+                <p class="info-item">
+                  <b>Likes: ${likes}</b>
+                </p>
+                <p class="info-item">
+                  <b>Views: ${views}</b>
+                </p>
+                <p class="info-item">
+                  <b>Comments: ${comments}</b>
+                </p>
+                <p class="info-item">
+                  <b>Downloads: ${downloads}</b>
+                </p>
+              </div>
+            </div>
+          `;
+      }
+    )
+    .join('');
 }
 
 // Плавная прокрутка страницы
