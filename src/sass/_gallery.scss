@@ -1,35 +1,20 @@
 img {
   display: block;
   height: auto;
-  width: 300px;
-}
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  width: 100%;
 }
 
-.photo-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 1px 8px 6px 0px rgba(0, 0, 0, 0.32);
-  -webkit-box-shadow: 1px 8px 6px 0px rgba(0, 0, 0, 0.32);
-  -moz-box-shadow: 1px 8px 6px 0px rgba(0, 0, 0, 0.32);
+.btn-area {
+  display: none;
 }
 
-.info {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  text-align: center;
+.btn-area.visible {
+  background-color: cadetblue;
+  padding: 20px;
+  display: block;
 }
 
-.info-item {
-  display: flex;
-}
-.add-photo-btn {
+.load-more {
   display: block;
   background-color: burlywood;
   box-shadow: 1px 8px 6px 0px rgba(0, 0, 0, 0.32);
@@ -38,4 +23,62 @@ img {
   border-radius: 4px;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px;
+  background-color: rgb(212, 79, 119);
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.photo-card {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  box-shadow: 1px 8px 6px 0px rgba(0, 0, 0, 0.32);
+  -webkit-box-shadow: 1px 8px 6px 0px rgba(0, 0, 0, 0.32);
+  -moz-box-shadow: 1px 8px 6px 0px rgba(0, 0, 0, 0.32);
+  background-color: #fff;
+}
+
+.info {
+  padding: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  text-align: center;
+}
+
+.info-item {
+  display: flex;
+  font-size: 12px;
+}
+.search-form {
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 50%;
+  top: 0;
+  width: 100%;
+  transform: translateX(-50%);
+  background-color: cadetblue;
+}
+.form-section {
+  position: relative;
+  height: 65px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.icon-search {
+  width: 20px;
+  height: 25px;
+  cursor: pointer;
+  fill: blue;
+  stroke: orangered;
 }
