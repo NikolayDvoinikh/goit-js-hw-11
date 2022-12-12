@@ -17,13 +17,9 @@ export default class ApiServise {
       page: `${this.page}`,
       per_page: 40,
     };
-    try {
-      const resp = await axios.get(`${BASE_URL}`, { params });
-      this.page += 1;
-      return resp;
-    } catch (err) {
-      console.log(err.message);
-    }
+
+    this.page += 1;
+    return await axios.get(`${BASE_URL}`, { params });
   }
 
   get startPage() {

@@ -1,7 +1,8 @@
 img {
   display: block;
-  height: auto;
-  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  width: 300px;
 }
 
 .btn-area {
@@ -32,6 +33,7 @@ img {
   gap: 20px;
   justify-content: center;
   margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .photo-card {
