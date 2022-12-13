@@ -14,25 +14,22 @@ refs.btnLoadMore.addEventListener('click', loadMore);
 async function loadMore() {
   removeClassVisibleBtn();
   try {
-    await apiServise.getImages().then(
-      ({
-        data: { hits, totalHits },
-        config: {
-          params: { page, per_page },
-        },
-      }) => {
-        refs.gallery.insertAdjacentHTML('beforeend', renderImages(hits));
-        lightBox.refresh();
-        if (totalHits / per_page > page) {
-          return visibleBtn();
-        } else {
-          removeClassVisibleBtn();
-          Notiflix.Notify.failure(
-            "We're sorry, but you've reached the end of search results."
-          );
-        }
-      }
-    );
+    const {
+      data: { hits, totalHits },
+      config: {
+        params: { page, per_page },
+      },
+    } = await apiServise.getImages();
+    refs.gallery.insertAdjacentHTML('beforeend', renderImages(hits));
+    lightBox.refresh();
+    if (totalHits / per_page > page) {
+      return visibleBtn();
+    } else {
+      removeClassVisibleBtn();
+      Notiflix.Notify.failure(
+        "We're sorry, but you've reached the end of search results."
+      );
+    }
   } catch (error) {
     console.log(error);
   }
@@ -54,29 +51,27 @@ async function onSubmitForm(e) {
   apiServise.searchImg = searchQuery.value.trim();
 
   try {
-    return await apiServise.getImages().then(
-      ({
-        data: { hits, totalHits },
-        config: {
-          params: { page, per_page },
-        },
-      }) => {
-        if (hits.length === 0) {
-          e.target.elements[1].removeAttribute('disabled');
-          return Notiflix.Notify.failure(
-            'Sorry, there are no images matching your search query. Please try again.'
-          );
-        } else {
-          refs.gallery.insertAdjacentHTML('beforeend', renderImages(hits));
-          lightBox.refresh();
-          e.target.elements[1].removeAttribute('disabled');
-          Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-          if (totalHits / per_page > page) {
-            return visibleBtn();
-          }
-        }
+    const {
+      data: { hits, totalHits },
+      config: {
+        params: { page, per_page },
+      },
+    } = await apiServise.getImages();
+
+    if (hits.length === 0) {
+      e.target.elements[1].removeAttribute('disabled');
+      return Notiflix.Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+    } else {
+      refs.gallery.insertAdjacentHTML('beforeend', renderImages(hits));
+      lightBox.refresh();
+      e.target.elements[1].removeAttribute('disabled');
+      Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+      if (totalHits / per_page > page) {
+        return visibleBtn();
       }
-    );
+    }
   } catch (error) {
     console.log(error);
   }
