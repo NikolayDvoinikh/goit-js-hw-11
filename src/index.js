@@ -26,7 +26,7 @@ async function loadMore() {
       return visibleBtn();
     } else {
       removeClassVisibleBtn();
-      Notiflix.Notify.failure(
+      return Notiflix.Notify.failure(
         "We're sorry, but you've reached the end of search results."
       );
     }
